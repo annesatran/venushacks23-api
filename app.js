@@ -16,6 +16,8 @@ app.get('/hello', (req, res) => {
     res.status(200).send("g'day mate!")
 })
 
+app.use("/products", productsRoutes)
+
 // 404 error handler
 app.use((req, res, next) => {
     return next(new NotFoundError())
