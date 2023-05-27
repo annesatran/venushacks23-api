@@ -19,6 +19,7 @@
   "homepage": "https://github.com/annesatran/venushacks23-api#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "pg-promise": "^11.5.0",
     "serve-index": "^1.9.1"
   }
 }
