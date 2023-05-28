@@ -6,7 +6,7 @@ CREATE TABLE products (
     type            TEXT NOT NULL,
     image           TEXT NOT NULL,
     ingredients     TEXT NOT NULL,
-    safety          INTEGER NOT NULL DEFAULT 0,
+    safety          TEXT NOT NULL,
     oily            BOOLEAN NOT NULL DEFAULT 0,
     dry             BOOLEAN NOT NULL DEFAULT 0,
     sensitive       BOOLEAN NOT NULL DEFAULT 0,
