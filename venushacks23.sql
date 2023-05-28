@@ -1,9 +1,8 @@
-\echo 'Delete and recreate database?'
-\prompt 'Return for yes or control-C for cancel > ' answer
+-- \drop postgres;
+-- \create postgres;
+\connect postgres;
 
-DROP DATABASE venushacks223;
-CREATE DATABASE venushacks34;
-\connect venushacks23;
+\i 'venushacks23-schema.sql'
+\i 'venushacks23-seed.sql'
 
-\i venushacks23-schema.sql
-\i venushacks23-seed.sql
+SELECT CURRENT_TIME;
