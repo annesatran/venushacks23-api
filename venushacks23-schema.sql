@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS products;
-
 CREATE TABLE products (
     id              SERIAL PRIMARY KEY,
     name            TEXT NOT NULL,
@@ -7,13 +6,13 @@ CREATE TABLE products (
     type            TEXT NOT NULL,
     image           TEXT NOT NULL,
     ingredients     TEXT NOT NULL,
-    safety          TEXT NOT NULL,
-    comedogenic     BOOLEAN NOT NULL DEFAULT FALSE,
-    oily            BOOLEAN NOT NULL DEFAULT FALSE,
-    dry             BOOLEAN NOT NULL DEFAULT FALSE,
-    sensitive       BOOLEAN NOT NULL DEFAULT FALSE,
-    acne-fighting   BOOLEAN NOT NULL DEFAULT FALSE,
-    anti_aging      BOOLEAN NOT NULL DEFAULT FALSE,
-    brightening     BOOLEAN NOT NULL DEFAULT FALSE,
-    uv              BOOLEAN NOT NULL DEFAULT FALSE          
+    safety          INTEGER NOT NULL DEFAULT 0,
+    oily            BOOLEAN NOT NULL DEFAULT 0,
+    dry             BOOLEAN NOT NULL DEFAULT 0,
+    sensitive       BOOLEAN NOT NULL DEFAULT 0,
+    comedogenic     INTEGER NOT NULL DEFAULT 0,
+    acne_fighting   INTEGER NOT NULL DEFAULT 0,
+    anti_aging      INTEGER NOT NULL DEFAULT 0,
+    brightening     INTEGER NOT NULL DEFAULT 0,
+    uv              INTEGER NOT NULL DEFAULT 0        
 );
