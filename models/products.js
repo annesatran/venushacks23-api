@@ -4,8 +4,10 @@ const { BadRequestError } = require("../utils/errors")
 
 class Products {
 
+    //needs an array
     static async fetchRecommended(needs) {
 
+            console.log('needs', needs)
         // check that all required fields are there / is not a malformed request body
         const requiredFields = ["cleanser", "toner", "serum", "moisturizer", "sunscreen", 
         "oily", "dry", "sensitive", 
@@ -26,18 +28,19 @@ class Products {
         }
 
         // algorithm to produce query string that filters skintype
-        var chosenSkintypes = ["oily", "dry", "sensitive"].filter((type) => eval("needs."+type+" == 1"))
+        var chosenSkintypes = ["oily", "dry", "sensitive"].filter((type) => needs[type] == 1)
         const skintypeQueryMap = chosenSkintypes.map(skintype => `"${skintype}" = 1`)
         const skintypeQuery = skintypeQueryMap.length > 0 ? "AND ("+ skintypeQueryMap.join(" OR ")+")" : ""
 
         // algorithm to produce query string that ranks product by skin needs
-        var chosenSkinNeeds = ["acne_fighting", "anti_aging", "brightening", "uv"].filter((need) => eval("needs."+need))
+
+        var chosenSkinNeeds = ["acne_fighting", "anti_aging", "brightening", "uv"].filter((need) => needs[need])
         chosenSkinNeeds = chosenSkinNeeds.map((need) => `"${need}"`)
         var skinNeedsQuery = chosenSkinNeeds > 0 ? chosenSkinNeeds.join(" + ") : "0" 
         skinNeedsQuery += (needs.oily == true) ? ` + "comedogenic"` : ""
 
         let promises = [];
-        
+
         const categories = ["cleanser", "toner", "serum", "moisturizer", "sunscreen"]
         categories.forEach( (item) => {
             const query = 
