@@ -6,15 +6,17 @@ class Products {
 
     static async fetchRecommended(needs) {
 
-        // check that all required fields are there / is not a malformed request body
-        const requiredFields = ["cleanser", "toner", "serum", "moisturizer", "sunscreen", 
-        "oily", "dry", "sensitive", 
-        "acne_fighting", "anti_aging", "brightening", "uv"]
-        requiredFields.forEach((field) => {
-            if (!needs.hasOwnProperty(field)) {
-                throw new BadRequestError("Invalid request body")
-            }
-        })
+        console.log(needs, "needs")
+
+        // // check that all required fields are there / is not a malformed request body
+        // const requiredFields = ["cleanser", "toner", "serum", "moisturizer", "sunscreen", 
+        // "oily", "dry", "sensitive", 
+        // "acne_fighting", "anti_aging", "brightening", "uv"]
+        // requiredFields.forEach((field) => {
+        //     if (!needs.hasOwnProperty(field)) {
+        //         throw new BadRequestError("Invalid request body")
+        //     }
+        // })
 
         // initialize return JSON
         var productRecs = {
@@ -42,11 +44,11 @@ class Products {
                 const query = 
                     `SELECT *, SUM(${skinNeedsQuery}) AS "ranking"  
                     FROM products
-                    WHERE "type" = $1 AND "safety" >= '50' ${skintypeQuery}
+                    WHERE "safety" >= '50' ${skintypeQuery}
                     GROUP BY "id"
                     ORDER BY "ranking"
                     LIMIT 20`
-                var result = await db.query(query, [key])
+                var result = await db.query(query)
                 eval("productRecs."+key+" = "+"result.rows") // update product recs JSON
             }
         }
