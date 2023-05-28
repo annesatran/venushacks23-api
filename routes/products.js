@@ -15,6 +15,7 @@ router.get("/", async (req, res, next) => {
 router.post("/recommended", async (req, res, next) => {
     try {
         const needs = req.body
+        console.log(req.body)
         const productRecs = await Products.fetchRecommended(needs)
         return res.status(200).json({ productRecs })
     } catch (err) {
