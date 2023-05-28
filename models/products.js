@@ -42,11 +42,11 @@ class Products {
                 const query = 
                     `SELECT *, SUM(${skinNeedsQuery}) AS "ranking"  
                     FROM products
-                    WHERE "safety" >= '50' ${skintypeQuery}
+                    WHERE "type" = $1 AND safety" >= '50'
                     GROUP BY "id"
                     ORDER BY "ranking"
                     LIMIT 20`
-                var result = await db.query(query)
+                var result = await db.query(query, [key])
                 eval("productRecs."+key+" = "+"result.rows") // update product recs JSON
             }
         }
