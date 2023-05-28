@@ -34,7 +34,7 @@ class Products {
 
         // algorithm to produce query string that ranks product by skin needs
 
-        var chosenSkinNeeds = ["acne_fighting", "anti_aging", "brightening", "uv"].filter((need) => needs[need])
+        var chosenSkinNeeds = ["acne_fighting", "anti_aging", "brightening", "uv"].filter((need) => needs[need] == 1)
         chosenSkinNeeds = chosenSkinNeeds.map((need) => `"${need}"`)
         var skinNeedsQuery = chosenSkinNeeds > 0 ? chosenSkinNeeds.join(" + ") : "0" 
         skinNeedsQuery += (needs.oily == true) ? ` + "comedogenic"` : ""
