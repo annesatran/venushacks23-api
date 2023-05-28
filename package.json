@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/annesatran/venushacks23-api#readme",
   "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "pg-promise": "^11.5.0",
     "serve-index": "^1.9.1"
   }
