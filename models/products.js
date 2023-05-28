@@ -43,7 +43,7 @@ class Products {
                 const query = 
                     `SELECT *, SUM(${skinNeedsQuery}) AS ranking   
                     FROM products
-                    WHERE type = $1 AND safety >= 50
+                    WHERE type = $1 AND safety >= "50"
                     ${skintypeQuery}
                     ORDER BY ranking
                     LIMIT 20`
