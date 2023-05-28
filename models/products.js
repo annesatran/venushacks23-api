@@ -6,17 +6,15 @@ class Products {
 
     static async fetchRecommended(needs) {
 
-        console.log(needs, "needs")
-
-        // // check that all required fields are there / is not a malformed request body
-        // const requiredFields = ["cleanser", "toner", "serum", "moisturizer", "sunscreen", 
-        // "oily", "dry", "sensitive", 
-        // "acne_fighting", "anti_aging", "brightening", "uv"]
-        // requiredFields.forEach((field) => {
-        //     if (!needs.hasOwnProperty(field)) {
-        //         throw new BadRequestError("Invalid request body")
-        //     }
-        // })
+        // check that all required fields are there / is not a malformed request body
+        const requiredFields = ["cleanser", "toner", "serum", "moisturizer", "sunscreen", 
+        "oily", "dry", "sensitive", 
+        "acne_fighting", "anti_aging", "brightening", "uv"]
+        requiredFields.forEach((field) => {
+            if (!needs.hasOwnProperty(field)) {
+                throw new BadRequestError("Invalid request body")
+            }
+        })
 
         // initialize return JSON
         var productRecs = {
