@@ -36,20 +36,26 @@ class Products {
         var skinNeedsQuery = chosenSkinNeeds > 0 ? chosenSkinNeeds.join(" + ") : "0" 
         skinNeedsQuery += (needs.oily == true) ? ` + "comedogenic"` : ""
 
-        // loop through each skincare category and produce results
-        for (const [key, _] of Object.entries(productRecs)) {
-            if (eval("needs."+key)) {
-                const query = 
-                    `SELECT *, SUM(${skinNeedsQuery}) AS "ranking"  
-                    FROM products
-                    WHERE "type" = $1 AND safety" >= '50'
-                    GROUP BY "id"
-                    ORDER BY "ranking"
-                    LIMIT 20`
-                var result = await db.query(query, [key])
-                eval("productRecs."+key+" = "+"result.rows") // update product recs JSON
-            }
-        }
+        let promises = [];
+        
+        const categories = ["cleanser", "toner", "serum", "moisturizer", "sunscreen"]
+        categories.forEach( (item) => {
+            const query = 
+                `SELECT *, SUM(${skinNeedsQuery}) AS "ranking"  
+                FROM products
+                WHERE "type" = $1 AND "safety" >= '50' ${skintypeQuery}
+                GROUP BY "id"
+                ORDER BY "ranking"
+                LIMIT 3;`;
+            promises.push(db.query(query, [item]))
+        });
+
+        const resultOfPromises = await Promise.all(promises);
+        // update product recs JSON
+        resultOfPromises.forEach((result, index) => {
+            productRecs[categories[index]] = result.rows
+        })
+
         return productRecs
     }
 }
